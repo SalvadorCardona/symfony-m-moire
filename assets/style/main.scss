@@ -1,0 +1,7 @@
+@import "node_modules/tailwindcss/base";
+@import "node_modules/tailwindcss/components";
+@import "node_modules/tailwindcss/utilities";
+
+body {
+  @apply bg-gray-50 text-primary;
+}
