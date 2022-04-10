@@ -4,7 +4,12 @@
     <input type="text" class="app-input" v-model="loginRequest.password" />
     <button class="app-btn" @click="() => userService.connection(loginRequest)">Se connecter</button>
   </div>
-  <div v-else>Vous êtes connecté</div>
+  <div v-else>
+    Vous êtes connecté
+    <div>
+      {{userService.user}}
+    </div>
+  </div>
 </template>
 
 <script lang="ts" setup>

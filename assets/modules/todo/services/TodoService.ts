@@ -4,7 +4,7 @@ import { ApiResponse } from 'openapi-typescript-fetch'
 export type Todo = ApiSchemas['Todo']
 
 export default class TodoService {
-  public todos: Todo[] | null = null
+  public todos: Todo | null = null
 
   public loadTodo(): Promise<ApiResponse<Todo[]>> {
     return fetcher

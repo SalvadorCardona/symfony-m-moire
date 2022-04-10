@@ -15,6 +15,7 @@
     "jwt-decode": "^3.1.2",
     "openapi-typescript-fetch": "^1.1.2",
     "tailwind": "3",
+    "visual-editor": "boxraiser/visual-editor",
     "vue": "~3.2",
     "vue-router": "~4.0",
     "vuex": "~4.0"
