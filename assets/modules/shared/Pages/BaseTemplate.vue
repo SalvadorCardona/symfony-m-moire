@@ -11,6 +11,9 @@
         <RouterLink :to="{name: PageList.USER_PAGE}">
           User
         </RouterLink>
+        <RouterLink :to="{name: PageList.VISUAL_EDITOR}">
+          Visual editor
+        </RouterLink>
       </nav>
     </header>
 
