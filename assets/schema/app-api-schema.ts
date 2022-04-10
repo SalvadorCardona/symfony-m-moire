@@ -4,785 +4,883 @@
  */
 
 export interface paths {
-  "/api/authentication/token": {
-    post: operations["postCredentialsItem"];
-    parameters: {};
-  };
-  "/api/authors": {
+  '/api/authentication/token': {
+    post: operations['postCredentialsItem']
+    parameters: {}
+  }
+  '/api/authors': {
     /** Retrieves the collection of Author resources. */
-    get: operations["getAuthorCollection"];
+    get: operations['getAuthorCollection']
     /** Creates a Author resource. */
-    post: operations["postAuthorCollection"];
-    parameters: {};
-  };
-  "/api/authors/{id}": {
+    post: operations['postAuthorCollection']
+    parameters: {}
+  }
+  '/api/authors/{id}': {
     /** Retrieves a Author resource. */
-    get: operations["getAuthorItem"];
+    get: operations['getAuthorItem']
     /** Replaces the Author resource. */
-    put: operations["putAuthorItem"];
+    put: operations['putAuthorItem']
     /** Removes the Author resource. */
-    delete: operations["deleteAuthorItem"];
+    delete: operations['deleteAuthorItem']
     /** Updates the Author resource. */
-    patch: operations["patchAuthorItem"];
-    parameters: {};
-  };
-  "/api/books": {
+    patch: operations['patchAuthorItem']
+    parameters: {}
+  }
+  '/api/books': {
     /** Retrieves the collection of Book resources. */
-    get: operations["getBookCollection"];
+    get: operations['getBookCollection']
     /** Creates a Book resource. */
-    post: operations["postBookCollection"];
-    parameters: {};
-  };
-  "/api/books/{id}": {
+    post: operations['postBookCollection']
+    parameters: {}
+  }
+  '/api/books/{id}': {
     /** Retrieves a Book resource. */
-    get: operations["getBookItem"];
+    get: operations['getBookItem']
     /** Replaces the Book resource. */
-    put: operations["putBookItem"];
+    put: operations['putBookItem']
     /** Removes the Book resource. */
-    delete: operations["deleteBookItem"];
+    delete: operations['deleteBookItem']
     /** Updates the Book resource. */
-    patch: operations["patchBookItem"];
-    parameters: {};
-  };
-  "/api/contexts": {
-    /** Retrieves the collection of Context resources. */
-    get: operations["getContextCollection"];
-    parameters: {};
-  };
-  "/api/todos": {
+    patch: operations['patchBookItem']
+    parameters: {}
+  }
+  '/api/contexts': {
+    /** Retrieves the collection of UserContext resources. */
+    get: operations['getContextCollection']
+    parameters: {}
+  }
+  '/api/reset_password_requests': {
+    /** Creates a ResetPasswordRequest resource. */
+    post: operations['postResetPasswordRequestCollection']
+    parameters: {}
+  }
+  '/api/todos': {
     /** Retrieves the collection of Todo resources. */
-    get: operations["getTodoCollection"];
+    get: operations['getTodoCollection']
     /** Creates a Todo resource. */
-    post: operations["postTodoCollection"];
-    parameters: {};
-  };
-  "/api/todos/{id}": {
+    post: operations['postTodoCollection']
+    parameters: {}
+  }
+  '/api/todos/{id}': {
     /** Retrieves a Todo resource. */
-    get: operations["getTodoItem"];
+    get: operations['getTodoItem']
     /** Replaces the Todo resource. */
-    put: operations["putTodoItem"];
+    put: operations['putTodoItem']
     /** Removes the Todo resource. */
-    delete: operations["deleteTodoItem"];
+    delete: operations['deleteTodoItem']
     /** Updates the Todo resource. */
-    patch: operations["patchTodoItem"];
-    parameters: {};
-  };
-  "/api/users/{id}": {
+    patch: operations['patchTodoItem']
+    parameters: {}
+  }
+  '/api/user_change_passwords': {
+    /** Creates a UserChangePassword resource. */
+    post: operations['postUserChangePasswordCollection']
+    parameters: {}
+  }
+  '/api/users/{id}': {
     /** Retrieves a User resource. */
-    get: operations["getUserItem"];
-    parameters: {};
-  };
+    get: operations['getUserItem']
+    parameters: {}
+  }
 }
 
 export interface components {
   schemas: {
     Author: {
-      id?: number;
-      books?: string[];
-    };
-    "Author.jsonld": {
-      "@context"?:
+      id?: number
+      books?: string[]
+    }
+    'Author.jsonld': {
+      '@context'?:
         | string
         | ({
-            "@vocab": string;
+            '@vocab': string
             /** @enum {string} */
-            hydra: "http://www.w3.org/ns/hydra/core#";
-          } & { [key: string]: unknown });
-      "@id"?: string;
-      "@type"?: string;
-      id?: number;
-      books?: string[];
-    };
+            hydra: 'http://www.w3.org/ns/hydra/core#'
+          } & { [key: string]: unknown })
+      '@id'?: string
+      '@type'?: string
+      id?: number
+      books?: string[]
+    }
     Book: {
-      id?: number;
-      name?: string | null;
+      id?: number
+      name?: string | null
       /** Format: iri-reference */
-      author?: string | null;
-    };
-    "Book.jsonld": {
-      "@context"?:
+      author?: string | null
+    }
+    'Book.jsonld': {
+      '@context'?:
         | string
         | ({
-            "@vocab": string;
+            '@vocab': string
             /** @enum {string} */
-            hydra: "http://www.w3.org/ns/hydra/core#";
-          } & { [key: string]: unknown });
-      "@id"?: string;
-      "@type"?: string;
-      id?: number;
-      name?: string | null;
+            hydra: 'http://www.w3.org/ns/hydra/core#'
+          } & { [key: string]: unknown })
+      '@id'?: string
+      '@type'?: string
+      id?: number
+      name?: string | null
       /** Format: iri-reference */
-      author?: string | null;
-    };
+      author?: string | null
+    }
     Context: {
-      email?: string | null;
-      host?: string;
-    };
-    "Context.jsonld": {
-      "@id"?: string;
-      "@type"?: string;
-      email?: string | null;
-      host?: string;
-    };
+      email?: string | null
+      host?: string
+    }
+    'Context.jsonld': {
+      '@id'?: string
+      '@type'?: string
+      email?: string | null
+      host?: string
+    }
+    ResetPasswordRequest: {
+      email?: string
+    }
+    'ResetPasswordRequest.jsonld': {
+      '@context'?:
+        | string
+        | ({
+            '@vocab': string
+            /** @enum {string} */
+            hydra: 'http://www.w3.org/ns/hydra/core#'
+          } & { [key: string]: unknown })
+      '@id'?: string
+      '@type'?: string
+      email?: string
+    }
     Todo: {
-      id?: number;
-      content?: string;
-    };
-    "Todo.jsonld": {
-      "@context"?:
+      id?: number
+      content?: string
+    }
+    'Todo.jsonld': {
+      '@context'?:
         | string
         | ({
-            "@vocab": string;
+            '@vocab': string
             /** @enum {string} */
-            hydra: "http://www.w3.org/ns/hydra/core#";
-          } & { [key: string]: unknown });
-      "@id"?: string;
-      "@type"?: string;
-      id?: number;
-      content?: string;
-    };
+            hydra: 'http://www.w3.org/ns/hydra/core#'
+          } & { [key: string]: unknown })
+      '@id'?: string
+      '@type'?: string
+      id?: number
+      content?: string
+    }
     User: {
-      id?: number | null;
-      email?: string;
-      roles?: string[];
-      password?: string;
+      id?: number
+      email?: string
+      roles?: string[]
+      password?: string
       /** @description A visual identifier that represents this user. */
-      userIdentifier?: string;
-    };
-    "User.jsonld": {
-      "@context"?:
+      userIdentifier?: string
+      username?: string
+    }
+    'User.jsonld': {
+      '@context'?:
         | string
         | ({
-            "@vocab": string;
+            '@vocab': string
             /** @enum {string} */
-            hydra: "http://www.w3.org/ns/hydra/core#";
-          } & { [key: string]: unknown });
-      "@id"?: string;
-      "@type"?: string;
-      id?: number | null;
-      email?: string;
-      roles?: string[];
-      password?: string;
+            hydra: 'http://www.w3.org/ns/hydra/core#'
+          } & { [key: string]: unknown })
+      '@id'?: string
+      '@type'?: string
+      id?: number
+      email?: string
+      roles?: string[]
+      password?: string
       /** @description A visual identifier that represents this user. */
-      userIdentifier?: string;
-    };
+      userIdentifier?: string
+      username?: string
+    }
+    UserChangePassword: {
+      /** Format: uuid */
+      resetPasswordRequestId?: string
+      password?: string
+    }
+    'UserChangePassword.jsonld': {
+      '@context'?:
+        | string
+        | ({
+            '@vocab': string
+            /** @enum {string} */
+            hydra: 'http://www.w3.org/ns/hydra/core#'
+          } & { [key: string]: unknown })
+      '@id'?: string
+      '@type'?: string
+      /** Format: uuid */
+      resetPasswordRequestId?: string
+      password?: string
+    }
     Token: {
-      token?: string;
-    };
+      token?: string
+    }
     Credentials: {
       /** @example johndoe@example.com */
-      email?: string;
+      email?: string
       /** @example apassword */
-      password?: string;
-    };
-  };
-  responses: {};
-  parameters: {};
-  requestBodies: {};
-  headers: {};
+      password?: string
+    }
+  }
+  responses: {}
+  parameters: {}
+  requestBodies: {}
+  headers: {}
 }
 
 export interface operations {
   postCredentialsItem: {
-    parameters: {};
+    parameters: {}
     responses: {
       /** Get JWT token */
       200: {
         content: {
-          "application/json": components["schemas"]["Token"];
-        };
-      };
-    };
+          'application/json': components['schemas']['Token']
+        }
+      }
+    }
     /** Generate new JWT Token */
     requestBody: {
       content: {
-        "application/json": components["schemas"]["Credentials"];
-      };
-    };
-  };
+        'application/json': components['schemas']['Credentials']
+      }
+    }
+  }
   /** Retrieves the collection of Author resources. */
   getAuthorCollection: {
     parameters: {
       query: {
         /** The collection page number */
-        page?: number;
-      };
-    };
+        page?: number
+      }
+    }
     responses: {
       /** Author collection */
       200: {
         content: {
-          "application/ld+json": {
-            "hydra:member": components["schemas"]["Author.jsonld"][];
-            "hydra:totalItems"?: number;
-            "hydra:view"?: {
+          'application/ld+json': {
+            'hydra:member': components['schemas']['Author.jsonld'][]
+            'hydra:totalItems'?: number
+            'hydra:view'?: {
               /** Format: iri-reference */
-              "@id"?: string;
-              "@type"?: string;
+              '@id'?: string
+              '@type'?: string
               /** Format: iri-reference */
-              "hydra:first"?: string;
+              'hydra:first'?: string
               /** Format: iri-reference */
-              "hydra:last"?: string;
+              'hydra:last'?: string
               /** Format: iri-reference */
-              "hydra:previous"?: string;
+              'hydra:previous'?: string
               /** Format: iri-reference */
-              "hydra:next"?: string;
-            };
-            "hydra:search"?: {
-              "@type"?: string;
-              "hydra:template"?: string;
-              "hydra:variableRepresentation"?: string;
-              "hydra:mapping"?: {
-                "@type"?: string;
-                variable?: string;
-                property?: string | null;
-                required?: boolean;
-              }[];
-            };
-          };
-          "application/json": components["schemas"]["Author"][];
-          "text/html": components["schemas"]["Author"][];
-        };
-      };
-    };
-  };
+              'hydra:next'?: string
+            }
+            'hydra:search'?: {
+              '@type'?: string
+              'hydra:template'?: string
+              'hydra:variableRepresentation'?: string
+              'hydra:mapping'?: {
+                '@type'?: string
+                variable?: string
+                property?: string | null
+                required?: boolean
+              }[]
+            }
+          }
+          'application/json': components['schemas']['Author'][]
+          'text/html': components['schemas']['Author'][]
+        }
+      }
+    }
+  }
   /** Creates a Author resource. */
   postAuthorCollection: {
-    parameters: {};
+    parameters: {}
     responses: {
       /** Author resource created */
       201: {
         content: {
-          "application/ld+json": components["schemas"]["Author.jsonld"];
-          "application/json": components["schemas"]["Author"];
-          "text/html": components["schemas"]["Author"];
-        };
-      };
+          'application/ld+json': components['schemas']['Author.jsonld']
+          'application/json': components['schemas']['Author']
+          'text/html': components['schemas']['Author']
+        }
+      }
       /** Invalid input */
-      400: unknown;
+      400: unknown
       /** Unprocessable entity */
-      422: unknown;
-    };
+      422: unknown
+    }
     /** The new Author resource */
     requestBody: {
       content: {
-        "application/ld+json": components["schemas"]["Author.jsonld"];
-        "application/json": components["schemas"]["Author"];
-        "text/html": components["schemas"]["Author"];
-      };
-    };
-  };
+        'application/ld+json': components['schemas']['Author.jsonld']
+        'application/json': components['schemas']['Author']
+        'text/html': components['schemas']['Author']
+      }
+    }
+  }
   /** Retrieves a Author resource. */
   getAuthorItem: {
     parameters: {
       path: {
         /** Resource identifier */
-        id: string;
-      };
-    };
+        id: string
+      }
+    }
     responses: {
       /** Author resource */
       200: {
         content: {
-          "application/ld+json": components["schemas"]["Author.jsonld"];
-          "application/json": components["schemas"]["Author"];
-          "text/html": components["schemas"]["Author"];
-        };
-      };
+          'application/ld+json': components['schemas']['Author.jsonld']
+          'application/json': components['schemas']['Author']
+          'text/html': components['schemas']['Author']
+        }
+      }
       /** Resource not found */
-      404: unknown;
-    };
-  };
+      404: unknown
+    }
+  }
   /** Replaces the Author resource. */
   putAuthorItem: {
     parameters: {
       path: {
         /** Resource identifier */
-        id: string;
-      };
-    };
+        id: string
+      }
+    }
     responses: {
       /** Author resource updated */
       200: {
         content: {
-          "application/ld+json": components["schemas"]["Author.jsonld"];
-          "application/json": components["schemas"]["Author"];
-          "text/html": components["schemas"]["Author"];
-        };
-      };
+          'application/ld+json': components['schemas']['Author.jsonld']
+          'application/json': components['schemas']['Author']
+          'text/html': components['schemas']['Author']
+        }
+      }
       /** Invalid input */
-      400: unknown;
+      400: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Unprocessable entity */
-      422: unknown;
-    };
+      422: unknown
+    }
     /** The updated Author resource */
     requestBody: {
       content: {
-        "application/ld+json": components["schemas"]["Author.jsonld"];
-        "application/json": components["schemas"]["Author"];
-        "text/html": components["schemas"]["Author"];
-      };
-    };
-  };
+        'application/ld+json': components['schemas']['Author.jsonld']
+        'application/json': components['schemas']['Author']
+        'text/html': components['schemas']['Author']
+      }
+    }
+  }
   /** Removes the Author resource. */
   deleteAuthorItem: {
     parameters: {
       path: {
         /** Resource identifier */
-        id: string;
-      };
-    };
+        id: string
+      }
+    }
     responses: {
       /** Author resource deleted */
-      204: never;
+      204: never
       /** Resource not found */
-      404: unknown;
-    };
-  };
+      404: unknown
+    }
+  }
   /** Updates the Author resource. */
   patchAuthorItem: {
     parameters: {
       path: {
         /** Resource identifier */
-        id: string;
-      };
-    };
+        id: string
+      }
+    }
     responses: {
       /** Author resource updated */
       200: {
         content: {
-          "application/ld+json": components["schemas"]["Author.jsonld"];
-          "application/json": components["schemas"]["Author"];
-          "text/html": components["schemas"]["Author"];
-        };
-      };
+          'application/ld+json': components['schemas']['Author.jsonld']
+          'application/json': components['schemas']['Author']
+          'text/html': components['schemas']['Author']
+        }
+      }
       /** Invalid input */
-      400: unknown;
+      400: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Unprocessable entity */
-      422: unknown;
-    };
+      422: unknown
+    }
     /** The updated Author resource */
     requestBody: {
       content: {
-        "application/merge-patch+json": components["schemas"]["Author"];
-      };
-    };
-  };
+        'application/merge-patch+json': components['schemas']['Author']
+      }
+    }
+  }
   /** Retrieves the collection of Book resources. */
   getBookCollection: {
     parameters: {
       query: {
         /** The collection page number */
-        page?: number;
-      };
-    };
+        page?: number
+      }
+    }
     responses: {
       /** Book collection */
       200: {
         content: {
-          "application/ld+json": {
-            "hydra:member": components["schemas"]["Book.jsonld"][];
-            "hydra:totalItems"?: number;
-            "hydra:view"?: {
+          'application/ld+json': {
+            'hydra:member': components['schemas']['Book.jsonld'][]
+            'hydra:totalItems'?: number
+            'hydra:view'?: {
               /** Format: iri-reference */
-              "@id"?: string;
-              "@type"?: string;
+              '@id'?: string
+              '@type'?: string
               /** Format: iri-reference */
-              "hydra:first"?: string;
+              'hydra:first'?: string
               /** Format: iri-reference */
-              "hydra:last"?: string;
+              'hydra:last'?: string
               /** Format: iri-reference */
-              "hydra:previous"?: string;
+              'hydra:previous'?: string
               /** Format: iri-reference */
-              "hydra:next"?: string;
-            };
-            "hydra:search"?: {
-              "@type"?: string;
-              "hydra:template"?: string;
-              "hydra:variableRepresentation"?: string;
-              "hydra:mapping"?: {
-                "@type"?: string;
-                variable?: string;
-                property?: string | null;
-                required?: boolean;
-              }[];
-            };
-          };
-          "application/json": components["schemas"]["Book"][];
-          "text/html": components["schemas"]["Book"][];
-        };
-      };
-    };
-  };
+              'hydra:next'?: string
+            }
+            'hydra:search'?: {
+              '@type'?: string
+              'hydra:template'?: string
+              'hydra:variableRepresentation'?: string
+              'hydra:mapping'?: {
+                '@type'?: string
+                variable?: string
+                property?: string | null
+                required?: boolean
+              }[]
+            }
+          }
+          'application/json': components['schemas']['Book'][]
+          'text/html': components['schemas']['Book'][]
+        }
+      }
+    }
+  }
   /** Creates a Book resource. */
   postBookCollection: {
-    parameters: {};
+    parameters: {}
     responses: {
       /** Book resource created */
       201: {
         content: {
-          "application/ld+json": components["schemas"]["Book.jsonld"];
-          "application/json": components["schemas"]["Book"];
-          "text/html": components["schemas"]["Book"];
-        };
-      };
+          'application/ld+json': components['schemas']['Book.jsonld']
+          'application/json': components['schemas']['Book']
+          'text/html': components['schemas']['Book']
+        }
+      }
       /** Invalid input */
-      400: unknown;
+      400: unknown
       /** Unprocessable entity */
-      422: unknown;
-    };
+      422: unknown
+    }
     /** The new Book resource */
     requestBody: {
       content: {
-        "application/ld+json": components["schemas"]["Book.jsonld"];
-        "application/json": components["schemas"]["Book"];
-        "text/html": components["schemas"]["Book"];
-      };
-    };
-  };
+        'application/ld+json': components['schemas']['Book.jsonld']
+        'application/json': components['schemas']['Book']
+        'text/html': components['schemas']['Book']
+      }
+    }
+  }
   /** Retrieves a Book resource. */
   getBookItem: {
     parameters: {
       path: {
         /** Resource identifier */
-        id: string;
-      };
-    };
+        id: string
+      }
+    }
     responses: {
       /** Book resource */
       200: {
         content: {
-          "application/ld+json": components["schemas"]["Book.jsonld"];
-          "application/json": components["schemas"]["Book"];
-          "text/html": components["schemas"]["Book"];
-        };
-      };
+          'application/ld+json': components['schemas']['Book.jsonld']
+          'application/json': components['schemas']['Book']
+          'text/html': components['schemas']['Book']
+        }
+      }
       /** Resource not found */
-      404: unknown;
-    };
-  };
+      404: unknown
+    }
+  }
   /** Replaces the Book resource. */
   putBookItem: {
     parameters: {
       path: {
         /** Resource identifier */
-        id: string;
-      };
-    };
+        id: string
+      }
+    }
     responses: {
       /** Book resource updated */
       200: {
         content: {
-          "application/ld+json": components["schemas"]["Book.jsonld"];
-          "application/json": components["schemas"]["Book"];
-          "text/html": components["schemas"]["Book"];
-        };
-      };
+          'application/ld+json': components['schemas']['Book.jsonld']
+          'application/json': components['schemas']['Book']
+          'text/html': components['schemas']['Book']
+        }
+      }
       /** Invalid input */
-      400: unknown;
+      400: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Unprocessable entity */
-      422: unknown;
-    };
+      422: unknown
+    }
     /** The updated Book resource */
     requestBody: {
       content: {
-        "application/ld+json": components["schemas"]["Book.jsonld"];
-        "application/json": components["schemas"]["Book"];
-        "text/html": components["schemas"]["Book"];
-      };
-    };
-  };
+        'application/ld+json': components['schemas']['Book.jsonld']
+        'application/json': components['schemas']['Book']
+        'text/html': components['schemas']['Book']
+      }
+    }
+  }
   /** Removes the Book resource. */
   deleteBookItem: {
     parameters: {
       path: {
         /** Resource identifier */
-        id: string;
-      };
-    };
+        id: string
+      }
+    }
     responses: {
       /** Book resource deleted */
-      204: never;
+      204: never
       /** Resource not found */
-      404: unknown;
-    };
-  };
+      404: unknown
+    }
+  }
   /** Updates the Book resource. */
   patchBookItem: {
     parameters: {
       path: {
         /** Resource identifier */
-        id: string;
-      };
-    };
+        id: string
+      }
+    }
     responses: {
       /** Book resource updated */
       200: {
         content: {
-          "application/ld+json": components["schemas"]["Book.jsonld"];
-          "application/json": components["schemas"]["Book"];
-          "text/html": components["schemas"]["Book"];
-        };
-      };
+          'application/ld+json': components['schemas']['Book.jsonld']
+          'application/json': components['schemas']['Book']
+          'text/html': components['schemas']['Book']
+        }
+      }
       /** Invalid input */
-      400: unknown;
+      400: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Unprocessable entity */
-      422: unknown;
-    };
+      422: unknown
+    }
     /** The updated Book resource */
     requestBody: {
       content: {
-        "application/merge-patch+json": components["schemas"]["Book"];
-      };
-    };
-  };
-  /** Retrieves the collection of Context resources. */
+        'application/merge-patch+json': components['schemas']['Book']
+      }
+    }
+  }
+  /** Retrieves the collection of UserContext resources. */
   getContextCollection: {
     parameters: {
       query: {
         /** The collection page number */
-        page?: number;
-      };
-    };
+        page?: number
+      }
+    }
     responses: {
-      /** Context collection */
+      /** UserContext collection */
       200: {
         content: {
-          "application/ld+json": {
-            "hydra:member": components["schemas"]["Context.jsonld"][];
-            "hydra:totalItems"?: number;
-            "hydra:view"?: {
+          'application/ld+json': {
+            'hydra:member': components['schemas']['Context.jsonld'][]
+            'hydra:totalItems'?: number
+            'hydra:view'?: {
               /** Format: iri-reference */
-              "@id"?: string;
-              "@type"?: string;
+              '@id'?: string
+              '@type'?: string
               /** Format: iri-reference */
-              "hydra:first"?: string;
+              'hydra:first'?: string
               /** Format: iri-reference */
-              "hydra:last"?: string;
+              'hydra:last'?: string
               /** Format: iri-reference */
-              "hydra:previous"?: string;
+              'hydra:previous'?: string
               /** Format: iri-reference */
-              "hydra:next"?: string;
-            };
-            "hydra:search"?: {
-              "@type"?: string;
-              "hydra:template"?: string;
-              "hydra:variableRepresentation"?: string;
-              "hydra:mapping"?: {
-                "@type"?: string;
-                variable?: string;
-                property?: string | null;
-                required?: boolean;
-              }[];
-            };
-          };
-          "application/json": components["schemas"]["Context"][];
-          "text/html": components["schemas"]["Context"][];
-        };
-      };
-    };
-  };
+              'hydra:next'?: string
+            }
+            'hydra:search'?: {
+              '@type'?: string
+              'hydra:template'?: string
+              'hydra:variableRepresentation'?: string
+              'hydra:mapping'?: {
+                '@type'?: string
+                variable?: string
+                property?: string | null
+                required?: boolean
+              }[]
+            }
+          }
+          'application/json': components['schemas']['Context'][]
+          'text/html': components['schemas']['Context'][]
+        }
+      }
+    }
+  }
+  /** Creates a ResetPasswordRequest resource. */
+  postResetPasswordRequestCollection: {
+    parameters: {}
+    responses: {
+      /** ResetPasswordRequest resource created */
+      204: {
+        content: {
+          'application/ld+json': unknown
+          'application/json': unknown
+          'text/html': unknown
+        }
+      }
+      /** Invalid input */
+      400: unknown
+      /** Unprocessable entity */
+      422: unknown
+    }
+    /** The new ResetPasswordRequest resource */
+    requestBody: {
+      content: {
+        'application/ld+json': components['schemas']['ResetPasswordRequest.jsonld']
+        'application/json': components['schemas']['ResetPasswordRequest']
+        'text/html': components['schemas']['ResetPasswordRequest']
+      }
+    }
+  }
   /** Retrieves the collection of Todo resources. */
   getTodoCollection: {
     parameters: {
       query: {
         /** The collection page number */
-        page?: number;
-      };
-    };
+        page?: number
+      }
+    }
     responses: {
       /** Todo collection */
       200: {
         content: {
-          "application/ld+json": {
-            "hydra:member": components["schemas"]["Todo.jsonld"][];
-            "hydra:totalItems"?: number;
-            "hydra:view"?: {
+          'application/ld+json': {
+            'hydra:member': components['schemas']['Todo.jsonld'][]
+            'hydra:totalItems'?: number
+            'hydra:view'?: {
               /** Format: iri-reference */
-              "@id"?: string;
-              "@type"?: string;
+              '@id'?: string
+              '@type'?: string
               /** Format: iri-reference */
-              "hydra:first"?: string;
+              'hydra:first'?: string
               /** Format: iri-reference */
-              "hydra:last"?: string;
+              'hydra:last'?: string
               /** Format: iri-reference */
-              "hydra:previous"?: string;
+              'hydra:previous'?: string
               /** Format: iri-reference */
-              "hydra:next"?: string;
-            };
-            "hydra:search"?: {
-              "@type"?: string;
-              "hydra:template"?: string;
-              "hydra:variableRepresentation"?: string;
-              "hydra:mapping"?: {
-                "@type"?: string;
-                variable?: string;
-                property?: string | null;
-                required?: boolean;
-              }[];
-            };
-          };
-          "application/json": components["schemas"]["Todo"][];
-          "text/html": components["schemas"]["Todo"][];
-        };
-      };
-    };
-  };
+              'hydra:next'?: string
+            }
+            'hydra:search'?: {
+              '@type'?: string
+              'hydra:template'?: string
+              'hydra:variableRepresentation'?: string
+              'hydra:mapping'?: {
+                '@type'?: string
+                variable?: string
+                property?: string | null
+                required?: boolean
+              }[]
+            }
+          }
+          'application/json': components['schemas']['Todo'][]
+          'text/html': components['schemas']['Todo'][]
+        }
+      }
+    }
+  }
   /** Creates a Todo resource. */
   postTodoCollection: {
-    parameters: {};
+    parameters: {}
     responses: {
       /** Todo resource created */
       201: {
         content: {
-          "application/ld+json": components["schemas"]["Todo.jsonld"];
-          "application/json": components["schemas"]["Todo"];
-          "text/html": components["schemas"]["Todo"];
-        };
-      };
+          'application/ld+json': components['schemas']['Todo.jsonld']
+          'application/json': components['schemas']['Todo']
+          'text/html': components['schemas']['Todo']
+        }
+      }
       /** Invalid input */
-      400: unknown;
+      400: unknown
       /** Unprocessable entity */
-      422: unknown;
-    };
+      422: unknown
+    }
     /** The new Todo resource */
     requestBody: {
       content: {
-        "application/ld+json": components["schemas"]["Todo.jsonld"];
-        "application/json": components["schemas"]["Todo"];
-        "text/html": components["schemas"]["Todo"];
-      };
-    };
-  };
+        'application/ld+json': components['schemas']['Todo.jsonld']
+        'application/json': components['schemas']['Todo']
+        'text/html': components['schemas']['Todo']
+      }
+    }
+  }
   /** Retrieves a Todo resource. */
   getTodoItem: {
     parameters: {
       path: {
         /** Resource identifier */
-        id: string;
-      };
-    };
+        id: string
+      }
+    }
     responses: {
       /** Todo resource */
       200: {
         content: {
-          "application/ld+json": components["schemas"]["Todo.jsonld"];
-          "application/json": components["schemas"]["Todo"];
-          "text/html": components["schemas"]["Todo"];
-        };
-      };
+          'application/ld+json': components['schemas']['Todo.jsonld']
+          'application/json': components['schemas']['Todo']
+          'text/html': components['schemas']['Todo']
+        }
+      }
       /** Resource not found */
-      404: unknown;
-    };
-  };
+      404: unknown
+    }
+  }
   /** Replaces the Todo resource. */
   putTodoItem: {
     parameters: {
       path: {
         /** Resource identifier */
-        id: string;
-      };
-    };
+        id: string
+      }
+    }
     responses: {
       /** Todo resource updated */
       200: {
         content: {
-          "application/ld+json": components["schemas"]["Todo.jsonld"];
-          "application/json": components["schemas"]["Todo"];
-          "text/html": components["schemas"]["Todo"];
-        };
-      };
+          'application/ld+json': components['schemas']['Todo.jsonld']
+          'application/json': components['schemas']['Todo']
+          'text/html': components['schemas']['Todo']
+        }
+      }
       /** Invalid input */
-      400: unknown;
+      400: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Unprocessable entity */
-      422: unknown;
-    };
+      422: unknown
+    }
     /** The updated Todo resource */
     requestBody: {
       content: {
-        "application/ld+json": components["schemas"]["Todo.jsonld"];
-        "application/json": components["schemas"]["Todo"];
-        "text/html": components["schemas"]["Todo"];
-      };
-    };
-  };
+        'application/ld+json': components['schemas']['Todo.jsonld']
+        'application/json': components['schemas']['Todo']
+        'text/html': components['schemas']['Todo']
+      }
+    }
+  }
   /** Removes the Todo resource. */
   deleteTodoItem: {
     parameters: {
       path: {
         /** Resource identifier */
-        id: string;
-      };
-    };
+        id: string
+      }
+    }
     responses: {
       /** Todo resource deleted */
-      204: never;
+      204: never
       /** Resource not found */
-      404: unknown;
-    };
-  };
+      404: unknown
+    }
+  }
   /** Updates the Todo resource. */
   patchTodoItem: {
     parameters: {
       path: {
         /** Resource identifier */
-        id: string;
-      };
-    };
+        id: string
+      }
+    }
     responses: {
       /** Todo resource updated */
       200: {
         content: {
-          "application/ld+json": components["schemas"]["Todo.jsonld"];
-          "application/json": components["schemas"]["Todo"];
-          "text/html": components["schemas"]["Todo"];
-        };
-      };
+          'application/ld+json': components['schemas']['Todo.jsonld']
+          'application/json': components['schemas']['Todo']
+          'text/html': components['schemas']['Todo']
+        }
+      }
       /** Invalid input */
-      400: unknown;
+      400: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Unprocessable entity */
-      422: unknown;
-    };
+      422: unknown
+    }
     /** The updated Todo resource */
     requestBody: {
       content: {
-        "application/merge-patch+json": components["schemas"]["Todo"];
-      };
-    };
-  };
+        'application/merge-patch+json': components['schemas']['Todo']
+      }
+    }
+  }
+  /** Creates a UserChangePassword resource. */
+  postUserChangePasswordCollection: {
+    parameters: {}
+    responses: {
+      /** UserChangePassword resource created */
+      204: {
+        content: {
+          'application/ld+json': unknown
+          'application/json': unknown
+          'text/html': unknown
+        }
+      }
+      /** Invalid input */
+      400: unknown
+      /** Unprocessable entity */
+      422: unknown
+    }
+    /** The new UserChangePassword resource */
+    requestBody: {
+      content: {
+        'application/ld+json': components['schemas']['UserChangePassword.jsonld']
+        'application/json': components['schemas']['UserChangePassword']
+        'text/html': components['schemas']['UserChangePassword']
+      }
+    }
+  }
   /** Retrieves a User resource. */
   getUserItem: {
     parameters: {
       path: {
         /** Resource identifier */
-        id: string;
-      };
-    };
+        id: string
+      }
+    }
     responses: {
       /** User resource */
       200: {
         content: {
-          "application/ld+json": components["schemas"]["User.jsonld"];
-          "application/json": components["schemas"]["User"];
-          "text/html": components["schemas"]["User"];
-        };
-      };
+          'application/ld+json': components['schemas']['User.jsonld']
+          'application/json': components['schemas']['User']
+          'text/html': components['schemas']['User']
+        }
+      }
       /** Resource not found */
-      404: unknown;
-    };
-  };
+      404: unknown
+    }
+  }
 }
 
 export interface external {}

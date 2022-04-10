@@ -4,36 +4,30 @@ declare(strict_types=1);
 
 namespace App\Domain\Front\DataProvider;
 
-use ApiPlatform\Core\DataProvider\CollectionDataProviderInterface;
+use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
-use App\Domain\Front\Dto\Context;
+use App\Domain\Front\Dto\UserContext;
 
-class ContextProviders implements CollectionDataProviderInterface, RestrictedDataProviderInterface
+class ContextProviders implements  ItemDataProviderInterface, RestrictedDataProviderInterface
 {
     public function __construct()
     {
     }
 
-    public function getItem(string $resourceClass, $id, string $operationName = null, array $context = [])
+    public function getItem(string $resourceClass, $id, string $operationName = null, array $context = []): ?UserContext
     {
         if ('me' !== $id) {
-            return;
+            return null;
         }
+        $context = new UserContext();
+        $context->setHost('aaa');
+        $context->email = 'qsdsqdqsd';
 
-        return $this->contextService->getContext();
+        return $context;
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
     {
-        return Context::class === $resourceClass;
-    }
-
-    public function getCollection(string $resourceClass, string $operationName = null)
-    {
-        $context = new Context();
-        $context->email = 'test@gmail.com';
-        $context->setHost('test');
-
-        return (array) $context;
+        return UserContext::class === $resourceClass;
     }
 }

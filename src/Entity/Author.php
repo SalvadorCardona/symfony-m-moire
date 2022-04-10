@@ -7,18 +7,28 @@ use App\Repository\AuthorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AuthorRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    denormalizationContext: ['groups' => ['book:read']],
+    normalizationContext: ['groups' => ['book:read']]
+)]
 class Author
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups('book:read')]
     private ?int $id;
 
-    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Book::class)]
-    private ArrayCollection $books;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups('book:read')]
+    private ?string $name;
+
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Book::class, cascade: ["persist"])]
+    #[Groups('book:read')]
+    private Collection $books;
 
     public function __construct()
     {
@@ -58,5 +68,15 @@ class Author
         }
 
         return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): void
+    {
+        $this->name = $name;
     }
 }

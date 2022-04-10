@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\BookRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: BookRepository::class)]
 #[ApiResource]
@@ -13,9 +14,11 @@ class Book
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups('book:read')]
     private ?int $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups('book:read')]
     private ?string $name;
 
     #[ORM\ManyToOne(targetEntity: Author::class, inversedBy: 'books')]

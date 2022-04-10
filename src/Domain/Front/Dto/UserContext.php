@@ -9,9 +9,9 @@ use ApiPlatform\Core\Annotation\ApiResource;
 
 #[ApiResource(
     collectionOperations: ['get'],
-    itemOperations: [],
+    itemOperations: ['get'],
 )]
-class Context
+class UserContext
 {
     #[ApiProperty(identifier: true)]
     public ?string $email;
