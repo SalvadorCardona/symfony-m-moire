@@ -1,7 +1,3 @@
-install-dev:
-	cp .env.dev .env
-	docker-compose build
-
 php-bash:
 	docker exec -it php bash
 
@@ -23,3 +19,10 @@ start-prod:
 
 start-dev:
 	APP_ENV=dev docker-compose up
+
+build:
+	docker exec php composer install
+	docker exec php php bin/console doctrine:migrations:migrate
+	docker exec php php bin/console lexik:jwt:generate-keypair
+	docker exec node  yarn install
+	docker exec node  yarn build

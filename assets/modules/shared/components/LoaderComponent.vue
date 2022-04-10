@@ -16,6 +16,11 @@ defineProps({
 
 <style lang="scss">
 .content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
   &.loader-fixed {
     align-items: center;
     background: rgba(255, 255, 255, 0.8);

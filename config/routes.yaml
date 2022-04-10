@@ -5,3 +5,11 @@ controllers:
 kernel:
     resource: ../src/Kernel.php
     type: annotation
+
+authentication_token:
+    path: /api/authentication/token
+    methods: ['POST']
+
+reset_password:
+    path: /user/reset-password
+    methods: ['POST']

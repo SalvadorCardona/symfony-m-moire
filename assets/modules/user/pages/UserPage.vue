@@ -1,11 +1,16 @@
 <template>
-  <BaseTemplate>
-  <div>
-    User Page content
+  <div v-if="!userService.token">
+    <input type="text" class="app-input" v-model="loginRequest.email" />
+    <input type="text" class="app-input" v-model="loginRequest.password" />
+    <button class="app-btn" @click="() => userService.connection(loginRequest)">Se connecter</button>
   </div>
-    </BaseTemplate>
+  <div v-else>Vous êtes connecté</div>
 </template>
 
 <script lang="ts" setup>
-import BaseTemplate from '@/modules/shared/Pages/BaseTemplate.vue'
+import UserService, { LoginRequest } from '@/modules/user/services/UserService'
+import { useStore } from '@/store'
+
+const userService: UserService = useStore().state.userService
+const loginRequest: LoginRequest = { email: '', password: '' }
 </script>

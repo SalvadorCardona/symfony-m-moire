@@ -15,10 +15,10 @@ class Author
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private ?int $id;
 
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Book::class)]
-    private $books;
+    private ArrayCollection $books;
 
     public function __construct()
     {

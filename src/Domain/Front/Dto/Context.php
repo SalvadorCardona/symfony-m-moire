@@ -8,12 +8,14 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 
 #[ApiResource(
-    itemOperations: ['get'],
-    collectionOperations: []
+    collectionOperations: ['get'],
+    itemOperations: [],
 )]
 class Context
 {
     #[ApiProperty(identifier: true)]
+    public ?string $email;
+
     private string $host;
 
     public function getHost(): string

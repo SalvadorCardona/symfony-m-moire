@@ -13,13 +13,13 @@ class Book
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private ?int $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $name;
+    private ?string $name;
 
     #[ORM\ManyToOne(targetEntity: Author::class, inversedBy: 'books')]
-    private $author;
+    private ?Author $author;
 
     public function getId(): ?int
     {

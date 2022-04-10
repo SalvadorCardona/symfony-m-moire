@@ -4,6 +4,10 @@
  */
 
 export interface paths {
+  "/api/authentication/token": {
+    post: operations["postCredentialsItem"];
+    parameters: {};
+  };
   "/api/authors": {
     /** Retrieves the collection of Author resources. */
     get: operations["getAuthorCollection"];
@@ -38,6 +42,34 @@ export interface paths {
     delete: operations["deleteBookItem"];
     /** Updates the Book resource. */
     patch: operations["patchBookItem"];
+    parameters: {};
+  };
+  "/api/contexts": {
+    /** Retrieves the collection of Context resources. */
+    get: operations["getContextCollection"];
+    parameters: {};
+  };
+  "/api/todos": {
+    /** Retrieves the collection of Todo resources. */
+    get: operations["getTodoCollection"];
+    /** Creates a Todo resource. */
+    post: operations["postTodoCollection"];
+    parameters: {};
+  };
+  "/api/todos/{id}": {
+    /** Retrieves a Todo resource. */
+    get: operations["getTodoItem"];
+    /** Replaces the Todo resource. */
+    put: operations["putTodoItem"];
+    /** Removes the Todo resource. */
+    delete: operations["deleteTodoItem"];
+    /** Updates the Todo resource. */
+    patch: operations["patchTodoItem"];
+    parameters: {};
+  };
+  "/api/users/{id}": {
+    /** Retrieves a User resource. */
+    get: operations["getUserItem"];
     parameters: {};
   };
 }
@@ -82,6 +114,67 @@ export interface components {
       /** Format: iri-reference */
       author?: string | null;
     };
+    Context: {
+      email?: string | null;
+      host?: string;
+    };
+    "Context.jsonld": {
+      "@id"?: string;
+      "@type"?: string;
+      email?: string | null;
+      host?: string;
+    };
+    Todo: {
+      id?: number;
+      content?: string;
+    };
+    "Todo.jsonld": {
+      "@context"?:
+        | string
+        | ({
+            "@vocab": string;
+            /** @enum {string} */
+            hydra: "http://www.w3.org/ns/hydra/core#";
+          } & { [key: string]: unknown });
+      "@id"?: string;
+      "@type"?: string;
+      id?: number;
+      content?: string;
+    };
+    User: {
+      id?: number | null;
+      email?: string;
+      roles?: string[];
+      password?: string;
+      /** @description A visual identifier that represents this user. */
+      userIdentifier?: string;
+    };
+    "User.jsonld": {
+      "@context"?:
+        | string
+        | ({
+            "@vocab": string;
+            /** @enum {string} */
+            hydra: "http://www.w3.org/ns/hydra/core#";
+          } & { [key: string]: unknown });
+      "@id"?: string;
+      "@type"?: string;
+      id?: number | null;
+      email?: string;
+      roles?: string[];
+      password?: string;
+      /** @description A visual identifier that represents this user. */
+      userIdentifier?: string;
+    };
+    Token: {
+      token?: string;
+    };
+    Credentials: {
+      /** @example johndoe@example.com */
+      email?: string;
+      /** @example apassword */
+      password?: string;
+    };
   };
   responses: {};
   parameters: {};
@@ -90,6 +183,23 @@ export interface components {
 }
 
 export interface operations {
+  postCredentialsItem: {
+    parameters: {};
+    responses: {
+      /** Get JWT token */
+      200: {
+        content: {
+          "application/json": components["schemas"]["Token"];
+        };
+      };
+    };
+    /** Generate new JWT Token */
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["Credentials"];
+      };
+    };
+  };
   /** Retrieves the collection of Author resources. */
   getAuthorCollection: {
     parameters: {
@@ -432,6 +542,245 @@ export interface operations {
       content: {
         "application/merge-patch+json": components["schemas"]["Book"];
       };
+    };
+  };
+  /** Retrieves the collection of Context resources. */
+  getContextCollection: {
+    parameters: {
+      query: {
+        /** The collection page number */
+        page?: number;
+      };
+    };
+    responses: {
+      /** Context collection */
+      200: {
+        content: {
+          "application/ld+json": {
+            "hydra:member": components["schemas"]["Context.jsonld"][];
+            "hydra:totalItems"?: number;
+            "hydra:view"?: {
+              /** Format: iri-reference */
+              "@id"?: string;
+              "@type"?: string;
+              /** Format: iri-reference */
+              "hydra:first"?: string;
+              /** Format: iri-reference */
+              "hydra:last"?: string;
+              /** Format: iri-reference */
+              "hydra:previous"?: string;
+              /** Format: iri-reference */
+              "hydra:next"?: string;
+            };
+            "hydra:search"?: {
+              "@type"?: string;
+              "hydra:template"?: string;
+              "hydra:variableRepresentation"?: string;
+              "hydra:mapping"?: {
+                "@type"?: string;
+                variable?: string;
+                property?: string | null;
+                required?: boolean;
+              }[];
+            };
+          };
+          "application/json": components["schemas"]["Context"][];
+          "text/html": components["schemas"]["Context"][];
+        };
+      };
+    };
+  };
+  /** Retrieves the collection of Todo resources. */
+  getTodoCollection: {
+    parameters: {
+      query: {
+        /** The collection page number */
+        page?: number;
+      };
+    };
+    responses: {
+      /** Todo collection */
+      200: {
+        content: {
+          "application/ld+json": {
+            "hydra:member": components["schemas"]["Todo.jsonld"][];
+            "hydra:totalItems"?: number;
+            "hydra:view"?: {
+              /** Format: iri-reference */
+              "@id"?: string;
+              "@type"?: string;
+              /** Format: iri-reference */
+              "hydra:first"?: string;
+              /** Format: iri-reference */
+              "hydra:last"?: string;
+              /** Format: iri-reference */
+              "hydra:previous"?: string;
+              /** Format: iri-reference */
+              "hydra:next"?: string;
+            };
+            "hydra:search"?: {
+              "@type"?: string;
+              "hydra:template"?: string;
+              "hydra:variableRepresentation"?: string;
+              "hydra:mapping"?: {
+                "@type"?: string;
+                variable?: string;
+                property?: string | null;
+                required?: boolean;
+              }[];
+            };
+          };
+          "application/json": components["schemas"]["Todo"][];
+          "text/html": components["schemas"]["Todo"][];
+        };
+      };
+    };
+  };
+  /** Creates a Todo resource. */
+  postTodoCollection: {
+    parameters: {};
+    responses: {
+      /** Todo resource created */
+      201: {
+        content: {
+          "application/ld+json": components["schemas"]["Todo.jsonld"];
+          "application/json": components["schemas"]["Todo"];
+          "text/html": components["schemas"]["Todo"];
+        };
+      };
+      /** Invalid input */
+      400: unknown;
+      /** Unprocessable entity */
+      422: unknown;
+    };
+    /** The new Todo resource */
+    requestBody: {
+      content: {
+        "application/ld+json": components["schemas"]["Todo.jsonld"];
+        "application/json": components["schemas"]["Todo"];
+        "text/html": components["schemas"]["Todo"];
+      };
+    };
+  };
+  /** Retrieves a Todo resource. */
+  getTodoItem: {
+    parameters: {
+      path: {
+        /** Resource identifier */
+        id: string;
+      };
+    };
+    responses: {
+      /** Todo resource */
+      200: {
+        content: {
+          "application/ld+json": components["schemas"]["Todo.jsonld"];
+          "application/json": components["schemas"]["Todo"];
+          "text/html": components["schemas"]["Todo"];
+        };
+      };
+      /** Resource not found */
+      404: unknown;
+    };
+  };
+  /** Replaces the Todo resource. */
+  putTodoItem: {
+    parameters: {
+      path: {
+        /** Resource identifier */
+        id: string;
+      };
+    };
+    responses: {
+      /** Todo resource updated */
+      200: {
+        content: {
+          "application/ld+json": components["schemas"]["Todo.jsonld"];
+          "application/json": components["schemas"]["Todo"];
+          "text/html": components["schemas"]["Todo"];
+        };
+      };
+      /** Invalid input */
+      400: unknown;
+      /** Resource not found */
+      404: unknown;
+      /** Unprocessable entity */
+      422: unknown;
+    };
+    /** The updated Todo resource */
+    requestBody: {
+      content: {
+        "application/ld+json": components["schemas"]["Todo.jsonld"];
+        "application/json": components["schemas"]["Todo"];
+        "text/html": components["schemas"]["Todo"];
+      };
+    };
+  };
+  /** Removes the Todo resource. */
+  deleteTodoItem: {
+    parameters: {
+      path: {
+        /** Resource identifier */
+        id: string;
+      };
+    };
+    responses: {
+      /** Todo resource deleted */
+      204: never;
+      /** Resource not found */
+      404: unknown;
+    };
+  };
+  /** Updates the Todo resource. */
+  patchTodoItem: {
+    parameters: {
+      path: {
+        /** Resource identifier */
+        id: string;
+      };
+    };
+    responses: {
+      /** Todo resource updated */
+      200: {
+        content: {
+          "application/ld+json": components["schemas"]["Todo.jsonld"];
+          "application/json": components["schemas"]["Todo"];
+          "text/html": components["schemas"]["Todo"];
+        };
+      };
+      /** Invalid input */
+      400: unknown;
+      /** Resource not found */
+      404: unknown;
+      /** Unprocessable entity */
+      422: unknown;
+    };
+    /** The updated Todo resource */
+    requestBody: {
+      content: {
+        "application/merge-patch+json": components["schemas"]["Todo"];
+      };
+    };
+  };
+  /** Retrieves a User resource. */
+  getUserItem: {
+    parameters: {
+      path: {
+        /** Resource identifier */
+        id: string;
+      };
+    };
+    responses: {
+      /** User resource */
+      200: {
+        content: {
+          "application/ld+json": components["schemas"]["User.jsonld"];
+          "application/json": components["schemas"]["User"];
+          "text/html": components["schemas"]["User"];
+        };
+      };
+      /** Resource not found */
+      404: unknown;
     };
   };
 }

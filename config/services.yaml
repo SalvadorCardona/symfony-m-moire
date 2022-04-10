@@ -28,3 +28,6 @@ services:
             $manifest: '%kernel.project_dir%/public/assets/manifest.json'
             $cache: '@vite_cache_pool'
 
+    App\Domain\User\OpenApi\JWTDecorator:
+        decorates: 'api_platform.openapi.factory'
+        arguments: ['@.inner']

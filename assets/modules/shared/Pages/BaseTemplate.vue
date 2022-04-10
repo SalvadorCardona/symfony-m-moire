@@ -1,7 +1,17 @@
 <template>
   <div class="base-template">
     <header>
-      header
+      <nav class="flex items-center justify-between flex-wrap lg:px-12 bg-white wrapper">
+        <RouterLink :to="{name: PageList.HOME_PAGE}">
+          Home
+        </RouterLink>
+        <RouterLink :to="{name: PageList.TODO_PAGE}">
+          TODO
+        </RouterLink>
+        <RouterLink :to="{name: PageList.USER_PAGE}">
+          User
+        </RouterLink>
+      </nav>
     </header>
 
     <main>
@@ -13,6 +23,7 @@
 
 <script lang="ts" setup>
 import {useHead} from '@vueuse/head'
+import {PageList} from '@/router'
 
 const props = defineProps({
   title: {
