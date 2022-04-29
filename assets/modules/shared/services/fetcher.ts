@@ -50,7 +50,7 @@ if (token) {
 
 // global configuration
 fetcher.configure({
-  baseUrl: 'http://localhost:8080',
+  baseUrl: 'http://localhost:8888',
   init: {
     headers: headers,
   },

@@ -2,17 +2,8 @@
   <div class="base-template">
     <header>
       <nav class="flex items-center justify-between flex-wrap lg:px-12 bg-white wrapper">
-        <RouterLink :to="{name: PageList.HOME_PAGE}">
-          Home
-        </RouterLink>
-        <RouterLink :to="{name: PageList.TODO_PAGE}">
-          TODO
-        </RouterLink>
-        <RouterLink :to="{name: PageList.USER_PAGE}">
-          User
-        </RouterLink>
-        <RouterLink :to="{name: PageList.VISUAL_EDITOR}">
-          Visual editor
+        <RouterLink v-for="(pageName, key) in PageList" :key="key" :to="{name: pageName}">
+          {{ key }}
         </RouterLink>
       </nav>
     </header>
