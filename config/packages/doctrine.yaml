@@ -13,13 +13,13 @@ doctrine:
             App:
                 is_bundle: false
                 dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
-                alias: App
-            App\Domain:
+                prefix: 'Module\Entity'
+                alias: Module
+            App\Module:
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Domain'
-                prefix: 'App\Domain'
-                alias: Domain
+                dir: '%kernel.project_dir%/src/Module'
+                prefix: 'App\Module'
+                alias: Module
 
 when@test:
     doctrine:

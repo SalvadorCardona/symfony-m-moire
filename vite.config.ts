@@ -1,22 +1,8 @@
-import * as path from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import pkg from './package.json'
-import { resolve } from 'path'
-
-const twigRefreshPlugin = {
-  name: 'twig-refresh',
-  configureServer({ watcher, ws }) {
-    watcher.add(resolve('../templates/**/*.twig'))
-    watcher.on('change', function (path) {
-      if (path.endsWith('.twig')) {
-        ws.send({
-          type: 'full-reload',
-        })
-      }
-    })
-  },
-}
+import path from 'path'
+import svgLoader from 'vite-svg-loader'
 
 process.env.VITE_APP_VERSION = pkg.version
 if (process.env.NODE_ENV === 'production') {
@@ -24,45 +10,35 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 export default defineConfig({
-  root: './assets',
-  base: '/assets/',
   plugins: [
-    twigRefreshPlugin,
+    svgLoader({
+      svgo: false,
+    }),
     vue({
-      template: {
-        compilerOptions: {
-          isCustomElement: (tag) => tag.includes('visual-'),
-        },
-      },
       script: {
         refSugar: true,
       },
     }),
   ],
   server: {
-    watch: {
-      disableGlobbing: false,
-    },
-    hmr: {
-      protocol: 'ws',
-      host: 'localhost',
-    },
+    host: '0.0.0.0',
+    port: 3000
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './assets'),
+      '@': path.resolve(__dirname, './src'),
     },
   },
   build: {
     manifest: true,
     assetsDir: '',
-    outDir: '../public/assets/',
+    outDir: './../public/assets/',
     rollupOptions: {
       output: {
         manualChunks: undefined,
       },
       input: {
-        'main.ts': './assets/main.ts',
+        'main.ts': './src/main.ts',
       },
     },
   },

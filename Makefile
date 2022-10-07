@@ -27,7 +27,15 @@ start-dev:
 
 build:
 	$(PHP_CMD) php composer install
+	$(PHP_CMD) bin/console doctrine:schema:create
 	$(PHP_CMD) php php bin/console doctrine:migrations:migrate
 	$(PHP_CMD) php php bin/console lexik:jwt:generate-keypair
 	$(NODE_CMD) node  yarn install
 	$(NODE_CMD) node  yarn build
+
+fixture-load:
+	$(PHP_CMD) bin/console doctrine:fixtures:load  --purge-with-truncate
+
+test:
+	$(PHP_CMD) bin/phpunit
+

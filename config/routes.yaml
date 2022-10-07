@@ -1,5 +1,5 @@
 controllers:
-    resource: ../src/Domain/
+    resource: ../src/Module/
     type: annotation
 
 kernel:

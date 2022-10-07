@@ -1,7 +1,7 @@
 api_platform:
     show_webby: false
     mapping:
-        paths: ['%kernel.project_dir%/src/Entity', '%kernel.project_dir%/src', '%kernel.project_dir%/src/Domain']
+        paths: ['%kernel.project_dir%/src/Entity', '%kernel.project_dir%/src', '%kernel.project_dir%/src/Module']
     patch_formats:
         json: ['application/merge-patch+json']
     swagger:
