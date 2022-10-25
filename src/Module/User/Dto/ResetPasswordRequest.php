@@ -10,7 +10,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 #[ApiResource(
     collectionOperations: ['post' => [
         'output' => false,
-    ]],
+    ], ],
     itemOperations: []
 )]
 class ResetPasswordRequest

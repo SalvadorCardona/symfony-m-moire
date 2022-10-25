@@ -20,14 +20,20 @@ export default defineConfig({
       },
     }),
   ],
-  server: {
-    host: '0.0.0.0',
-    port: 3000
-  },
+  root: 'assets',
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      '@': path.resolve(__dirname, './assets'),
     },
+  },
+  server: {
+    hmr: {
+      protocol: 'ws',
+      host: 'localhost',
+      port: 4000
+    },
+    host: '0.0.0.0',
+    port: 3000
   },
   build: {
     manifest: true,
@@ -38,7 +44,7 @@ export default defineConfig({
         manualChunks: undefined,
       },
       input: {
-        'main.ts': './src/main.ts',
+        'main.ts': './assets/main.ts',
       },
     },
   },

@@ -4,13 +4,13 @@ enum BookType {
 }
 
 export abstract class book {
-    public type: BookType;
+    public type: BookType
 
     protected abstract getType(): BookType
 }
 
 export  class bookChildren extends book {
   protected getType(): BookType {
-    return undefined;
+    return undefined
   }
 }

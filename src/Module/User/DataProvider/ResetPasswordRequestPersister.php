@@ -35,7 +35,7 @@ final class ResetPasswordRequestPersister implements ContextAwareDataPersisterIn
         }
     }
 
-    public function remove($data, array $context = [])
+    public function remove($data, array $context = []): void
     {
         // TODO: Implement remove() method.
     }

@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Module\User\Factory\UserFactory;
 use Doctrine\Persistence\ObjectManager;
 
-class UserFixture extends BaseFixture
+class UserFixtureAbstract extends AbstractBaseFixture
 {
     public const USER_PASSWORD = 'password';
     public const ADMIN_EMAIL = 'admin@admin.fr';
@@ -13,8 +15,8 @@ class UserFixture extends BaseFixture
 
     public function __construct(
         private UserFactory $factory
-    )
-    {}
+    ) {
+    }
 
     public function load(ObjectManager $manager): void
     {
@@ -36,7 +38,7 @@ class UserFixture extends BaseFixture
             )
         );
 
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 5; ++$i) {
             $manager->persist(
                 $this->factory->createNew(
                     $faker->email,

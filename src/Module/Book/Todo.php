@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Module\Entity;
+declare(strict_types=1);
+
+namespace App\Module\Book;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Module\Repository\TodoRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TodoRepository::class)]
@@ -13,25 +14,13 @@ class Todo
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    protected ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $content;
+    public string $content;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getContent(): ?string
-    {
-        return $this->content;
-    }
-
-    public function setContent(string $content): self
-    {
-        $this->content = $content;
-
-        return $this;
     }
 }

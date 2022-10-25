@@ -15,7 +15,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserService
@@ -47,7 +46,7 @@ class UserService
      */
     public function changePassword(string $email, string $password): void
     {
-        $user = $this->userRepository->getUserByEmail($email);
+        $user = $this->userRepository->findUserByEmail($email);
 
         if (!$user) {
             throw new Exception('User not found');
@@ -59,11 +58,11 @@ class UserService
     }
 
     /**
-     * @throws Exception|TransportExceptionInterface
+     * @throws \Exception
      */
     public function changePasswordRequest(string $email): void
     {
-        $user = $this->userRepository->getUserByEmail($email);
+        $user = $this->userRepository->findUserByEmail($email);
 
         if (!$user) {
             throw new Exception('User not found');
@@ -76,7 +75,7 @@ class UserService
         $this->entityManager->persist($resetPasswordRequest);
         $this->entityManager->flush();
 
-        $urlReset = $baseUrl.self::URL_RESET_PASSWORD.$resetPasswordRequest->getId();
+        $urlReset = $baseUrl . self::URL_RESET_PASSWORD . $resetPasswordRequest->getId();
 
         $this->mailerService->send(
             $user->getEmail(),
@@ -90,8 +89,10 @@ class UserService
     /**
      * @throws Exception
      */
-    public function changePasswordByRequest(ResetPasswordRequest $resetPasswordRequest, UserChangePassword $userChangePassword): void
-    {
+    public function changePasswordByRequest(
+        ResetPasswordRequest $resetPasswordRequest,
+        UserChangePassword $userChangePassword
+    ): void {
         $datTimeDiff = $resetPasswordRequest->getCreateAt()->diff(new DateTime());
 
         if ($resetPasswordRequest->getUsed() || $datTimeDiff->days > self::MAX_DAYS_LIFE_REQUEST_PASSWORD) {

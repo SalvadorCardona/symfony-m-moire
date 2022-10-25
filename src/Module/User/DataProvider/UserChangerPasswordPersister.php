@@ -13,8 +13,10 @@ use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 final class UserChangerPasswordPersister implements ContextAwareDataPersisterInterface
 {
-    public function __construct(private UserService $userService, private ResetPasswordRequestRepository $resetPasswordRequestRepository)
-    {
+    public function __construct(
+        private UserService $userService,
+        private ResetPasswordRequestRepository $resetPasswordRequestRepository
+    ) {
     }
 
     public function supports($data, array $context = []): bool
@@ -42,7 +44,7 @@ final class UserChangerPasswordPersister implements ContextAwareDataPersisterInt
         }
     }
 
-    public function remove($data, array $context = [])
+    public function remove($data, array $context = []): void
     {
         // TODO: Implement remove() method.
     }

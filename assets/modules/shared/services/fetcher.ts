@@ -44,6 +44,7 @@ const fetcher = Fetcher.for<paths>()
 const token = StorageService.get<Token>('user')
 
 if (token) {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   headers.Authorization = 'Bearer ' + token.token
 }

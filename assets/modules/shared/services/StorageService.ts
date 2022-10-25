@@ -7,7 +7,7 @@ export default class StorageService {
     return JSON.parse(content)
   }
 
-  static set(key: string, content: any): void {
+  static set(key: string, content: unknown): void {
     localStorage.setItem(key, JSON.stringify(content))
   }
 

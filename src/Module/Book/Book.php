@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Module\Entity;
+declare(strict_types=1);
+
+namespace App\Module\Book;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Module\Repository\BookRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -19,37 +20,13 @@ class Book
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Groups('book:read')]
-    private ?string $name;
+    public ?string $name;
 
     #[ORM\ManyToOne(targetEntity: Author::class, inversedBy: 'books')]
-    private ?Author $author;
+    public ?Author $author;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(?string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getAuthor(): ?Author
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(?Author $author): self
-    {
-        $this->author = $author;
-
-        return $this;
     }
 }

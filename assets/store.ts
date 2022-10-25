@@ -9,6 +9,7 @@ export interface IRootState {
   todoService: TodoService
 }
 
+// eslint-disable-next-line symbol-description
 export const key: InjectionKey<Store<IRootState>> = Symbol()
 
 export enum Actions {
@@ -21,9 +22,6 @@ export const store = createStore<IRootState>({
     todoService: new TodoService()
   },
   actions: {
-    [Actions.APP_LOAD]: ({dispatch}): void => {
-
-    }
   }
 })
 

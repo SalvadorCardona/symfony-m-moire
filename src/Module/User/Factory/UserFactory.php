@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Module\User\Factory;
 
 use App\Module\User\Entity\User;
@@ -7,11 +9,9 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFactory
 {
-
     public function __construct(
         private UserPasswordHasherInterface $passwordHasher,
-    )
-    {
+    ) {
     }
 
     /**
@@ -21,8 +21,7 @@ class UserFactory
         string $email,
         string $password,
         array $role
-    ): User
-    {
+    ): User {
         $user = new User();
         $user->setEmail($email);
         $user->setRoles($role);

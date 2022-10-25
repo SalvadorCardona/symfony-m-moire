@@ -1,6 +1,6 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
 
 namespace App\Module\Front\Dto;
 
@@ -9,22 +9,12 @@ use ApiPlatform\Core\Annotation\ApiResource;
 
 #[ApiResource(
     collectionOperations: ['get'],
-    itemOperations: ['get'],
+    itemOperations: [],
 )]
 class UserContext
 {
     #[ApiProperty(identifier: true)]
-    public ?string $email;
+    public ?string $email = null;
 
-    private string $host;
-
-    public function getHost(): string
-    {
-        return $this->host;
-    }
-
-    public function setHost(string $host): void
-    {
-        $this->host = $host;
-    }
+    public ?string $host = null;
 }

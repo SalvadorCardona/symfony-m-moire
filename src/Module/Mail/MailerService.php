@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Module\Mail;
 
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 
@@ -19,7 +18,7 @@ class MailerService
     }
 
     /**
-     * @throws TransportExceptionInterface
+     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
      */
     public function send(
         string $to,
@@ -27,7 +26,7 @@ class MailerService
         string $body = '',
         ?array $data = null,
         string $template = MailListTemplate::BASE_MAIL
-    ) {
+    ): void {
         $email = (new TemplatedEmail())
             ->from(self::FROM_EMAIL)
             ->to(new Address($to))

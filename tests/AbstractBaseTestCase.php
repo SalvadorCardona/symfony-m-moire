@@ -1,9 +1,15 @@
 <?php
+
+declare(strict_types=1);
+
+namespace App\Tests;
+
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-abstract class BaseTestCase extends KernelTestCase
+abstract class AbstractBaseTestCase extends KernelTestCase
 {
-    protected static function getPayload(string $fileName): array {
+    protected static function getPayload(string $fileName): array
+    {
         $filePath = sprintf('tests/payloads/%s.json', $fileName);
 
         return static::getDecodedJsonFile($filePath);
@@ -24,7 +30,6 @@ abstract class BaseTestCase extends KernelTestCase
 
         assert(is_string($content));
 
-        /* @phpstan-ignore-next-line */
         return json_decode($content, true);
     }
 }

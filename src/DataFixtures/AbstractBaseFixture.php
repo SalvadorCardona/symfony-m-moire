@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Faker\Factory;
 use Faker\Generator;
 
-Abstract class BaseFixture extends Fixture
+abstract class AbstractBaseFixture extends Fixture
 {
     protected static function getFaker(): Generator
     {

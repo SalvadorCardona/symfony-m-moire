@@ -1,7 +1,7 @@
 <template>
   <div v-if="!userService.token">
-    <input type="text" class="app-input" v-model="loginRequest.email" />
-    <input type="text" class="app-input" v-model="loginRequest.password" />
+    <input v-model="loginRequest.email" type="text" class="app-input" />
+    <input v-model="loginRequest.password" type="text" class="app-input" />
     <button class="app-btn" @click="() => userService.connection(loginRequest)">Se connecter</button>
   </div>
   <div v-else>

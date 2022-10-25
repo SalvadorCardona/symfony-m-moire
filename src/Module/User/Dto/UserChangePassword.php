@@ -10,7 +10,7 @@ use Symfony\Component\Uid\Uuid;
 #[ApiResource(
     collectionOperations: ['post' => [
         'output' => false,
-    ]],
+    ], ],
     itemOperations: []
 )]
 class UserChangePassword

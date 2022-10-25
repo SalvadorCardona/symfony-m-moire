@@ -9,10 +9,19 @@ bash-php:
 bash-node:
 	docker exec -it $(CONTAINER_NAME_NODE)  sh
 
+php-cs-fixer:
+	$(PHP_CMD) vendor/bin/php-cs-fixer fix --verbose
+
+phpcbf:
+	$(PHP_CMD) vendor/bin/phpcbf src/ -v
+	$(PHP_CMD) vendor/bin/phpcbf tests/ -v
+
+fix-lint: phpcbf
+
 lint:
-	php vendor/bin/php-cs-fixer fix
-	php vendor/bin/phpstan analyse
-	yarn eslint
+	$(PHP_CMD) vendor/bin/phpcs
+	$(PHP_CMD) vendor/bin/phpstan analyse
+	$(NODE_CMD) yarn eslint
 
 api-schema:
 	$(PHP_CMD) php bin/console api:openapi:export  -o ./api.json
@@ -28,14 +37,21 @@ start-dev:
 build:
 	$(PHP_CMD) php composer install
 	$(PHP_CMD) bin/console doctrine:schema:create
-	$(PHP_CMD) php php bin/console doctrine:migrations:migrate
-	$(PHP_CMD) php php bin/console lexik:jwt:generate-keypair
-	$(NODE_CMD) node  yarn install
-	$(NODE_CMD) node  yarn build
+	$(PHP_CMD) bin/console doctrine:migrations:migrate
+	$(PHP_CMD) bin/console lexik:jwt:generate-keypair
+	$(NODE_CMD) yarn install
+	$(NODE_CMD) yarn build
+
+test:
+	$(PHP_CMD) bin/console --env=test doctrine:database:create
+	$(PHP_CMD) bin/console --env=test doctrine:database:drop  --force
+	$(PHP_CMD) bin/console --env=test doctrine:schema:create
+	$(PHP_CMD) bin/console --env=test doctrine:migrations:migrate --no-interaction --allow-no-migration
+	$(PHP_CMD) bin/console --env=test doctrine:fixtures:load --append
+	$(PHP_CMD) bin/phpunit
 
 fixture-load:
 	$(PHP_CMD) bin/console doctrine:fixtures:load  --purge-with-truncate
 
-test:
-	$(PHP_CMD) bin/phpunit
+
 

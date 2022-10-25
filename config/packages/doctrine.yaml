@@ -13,8 +13,8 @@ doctrine:
             App:
                 is_bundle: false
                 dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'Module\Entity'
-                alias: Module
+                prefix: 'App\Entity'
+                alias: App
             App\Module:
                 is_bundle: false
                 dir: '%kernel.project_dir%/src/Module'

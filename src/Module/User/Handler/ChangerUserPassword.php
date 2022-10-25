@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Module\User\Handler;
 
 use App\Module\User\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
 class ChangerUserPassword
 {
@@ -13,16 +15,18 @@ class ChangerUserPassword
         private UserRepository $userRepository,
         private UserPasswordHasherInterface $passwordHasher,
         private EntityManagerInterface $entityManager,
-    )
-    {
+    ) {
     }
 
+    /**
+     * @throws \Exception
+     */
     public function __invoke(string $email, string $password): void
     {
         $user = $this->userRepository->findOneBy(['email' => $email]);
 
         if (!$user) {
-            throw new Exception('User not found');
+            throw new UserNotFoundException();
         }
 
         $user->setPassword($this->passwordHasher->hashPassword($user, $password));

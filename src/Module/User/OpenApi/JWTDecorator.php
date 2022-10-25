@@ -2,13 +2,14 @@
 
 // api/src/OpenApi/JwtDecorator.php
 
+
 declare(strict_types=1);
 
 namespace App\Module\User\OpenApi;
 
-use ApiPlatform\Core\OpenApi\Factory\OpenApiFactoryInterface;
 use ApiPlatform\Core\OpenApi\Model;
 use ApiPlatform\Core\OpenApi\OpenApi;
+use ApiPlatform\OpenApi\Factory\OpenApiFactoryInterface;
 
 final class JWTDecorator implements OpenApiFactoryInterface
 {
